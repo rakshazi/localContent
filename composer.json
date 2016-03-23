@@ -1,0 +1,20 @@
+{
+    "name": "rakshazi/localContent",
+    "description": "Download full content from RSS/Atom feeds to local files and use it in offline",
+    "homepage": "https://github.com/rakshazi/localContent",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nikita Chernyi"
+        }
+    ],
+    "require": {
+        "fguillot/picofeed": "^0.1.19",
+        "greg0/lazer-database": "^1.1"
+    },
+
+    "autoload": {
+        "psr-4": {"Rakshazi\\": "src/"}
+    }
+}
