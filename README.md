@@ -40,6 +40,8 @@ $lc
 ->setRulesDir($rules_dir)
 ->setMediaDir($media_dir)
 ->setDatabaseDir($database_dir)
+->setFeeds($feeds)
+->setUserAgent($useragent)
 ->setTimezone($timezone);
 //Download content!
 $lc->download();

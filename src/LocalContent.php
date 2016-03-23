@@ -29,6 +29,8 @@ namespace Rakshazi;
  * ->setRulesDir($rules_dir)
  * ->setMediaDir($media_dir)
  * ->setDatabaseDir($database_dir)
+ * ->setFeeds($feeds)
+ * ->setUserAgent($useragent)
  * ->setTimezone($timezone);
  * //Download content!
  * $lc->download();
@@ -62,7 +64,7 @@ class LocalContent
      */
     public function setFeeds($feeds)
     {
-        $this->feeds = $array;
+        $this->feeds = $feeds;
 
         return $this;
     }
@@ -133,7 +135,7 @@ class LocalContent
      */
     public function download()
     {
-        $grabber = new \Rakshazi\LocalContent\Grabber($this->rules_dir, $this->useragent);
+        $grabber = new \Rakshazi\LocalContent\Grabber($this->rules_dir, $this->user_agent);
         $storage = new \Rakshazi\LocalContent\Storage($this->media_dir);
 
         foreach($this->feeds as $url => $category) {

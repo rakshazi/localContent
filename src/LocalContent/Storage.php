@@ -27,6 +27,9 @@ class Storage
      */
     public function get($table = 'posts')
     {
+        if (!file_exists(LAZER_DATA_PATH . 'posts.data.json')) {
+            $this->createPostsTable();
+        }
         return \Lazer\Classes\Database::table($table);
     }
 
@@ -60,7 +63,7 @@ class Storage
      */
     public function load($hash_id)
     {
-        return $this->get('posts')->where('hash_id', '=', $original_id)->findAll();
+        return $this->loadAll(array('hash_id','=',$hash_id));
     }
 
     /**
@@ -114,10 +117,6 @@ class Storage
      */
     public function add(\PicoFeed\Parser\Item $item, $category)
     {
-        if (!file_exists(LAZER_DATA_PATH . 'posts.data.json')) {
-            $this->createPostsTable();
-        }
-
         $row = $this->get('posts');
         $row->hash_id = $item->getId();
         $row->published = strtotime($item->getDate()->format("Y-m-d H:i:s"));
