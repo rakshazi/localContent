@@ -6,7 +6,7 @@ you to use them as offline copy of preferred sites.
 # Installation
 
 ```
-composer require rakshazi/localcontent:dev-master
+composer require rakshazi/local-content:dev-master
 ```
 
 # Usage
