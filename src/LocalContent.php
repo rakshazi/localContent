@@ -38,7 +38,7 @@ namespace Rakshazi;
  */
 class LocalContent
 {
-    protected $user_agent, $feeds, $rules_dir, $media_dir = null;
+    protected $storage, $grabber, $user_agent, $feeds, $rules_dir, $media_dir = null;
 
     /**
      * Set user agent for grabber.
@@ -127,6 +127,34 @@ class LocalContent
 
         return $this;
     }
+    
+    /**
+     * Return Storage object
+     * 
+     * @return \Rakshazi\SocialConnect\Storage
+     */
+    public function getStorage()
+    {
+        if ($this->storage === null) {
+           $this->storage = new \Rakshazi\LocalContent\Storage($this->media_dir);
+        }
+        
+        return $this->storage;
+    }
+    
+    /**
+     * Return Grabber object
+     * 
+     * @return \Rakshazi\SocialConnect\Grabber
+     */
+    public function getGrabber()
+    {
+        if ($this->grabber === null) {
+           $this->grabber = new \Rakshazi\LocalContent\Grabber($this->rules_dir, $this->user_agent);
+        }
+        
+        return $this->grabber;
+    }
 
     /**
      * Download and grab content from RSS/Atom feeds
@@ -135,12 +163,9 @@ class LocalContent
      */
     public function download()
     {
-        $grabber = new \Rakshazi\LocalContent\Grabber($this->rules_dir, $this->user_agent);
-        $storage = new \Rakshazi\LocalContent\Storage($this->media_dir);
-
         foreach($this->feeds as $url => $category) {
-            $feed = $grabber->get($url);
-            $storage->addAll($feed->getItems(), $category);
+            $feed = $this->getGrabber()->get($url);
+            $this->getStorage()->addAll($feed->getItems(), $category);
         }
     }
 }
