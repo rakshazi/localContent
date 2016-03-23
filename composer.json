@@ -1,5 +1,5 @@
 {
-    "name": "rakshazi/localContent",
+    "name": "rakshazi/local-content",
     "description": "Download full content from RSS/Atom feeds to local files and use it in offline",
     "homepage": "https://github.com/rakshazi/localContent",
     "type": "library",
