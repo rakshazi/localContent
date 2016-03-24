@@ -129,6 +129,25 @@ class LocalContent
     }
     
     /**
+     * Set custom storage class.
+     * This class must be child of \Rakshazi\LocalContent\Storage
+     * 
+     * @param string $classname full class name with namespace
+     * 
+     * @return \Rakshazi\LocalContent
+     */
+    public function setStorage($classname)
+    {
+        if (is_subclass_of($classname, '\Rakshazi\LocalContent\Storage')) {
+            $this->storage = new $classname($this->media_dir);
+            
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
      * Return Storage object
      * 
      * @return \Rakshazi\SocialConnect\Storage
