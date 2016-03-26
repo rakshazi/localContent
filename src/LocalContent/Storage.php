@@ -97,8 +97,8 @@ class Storage
      */
     public function addAll($items, $category)
     {
-        usort($items, function (\PicoFeed\Parser\Item $a, \PicoFeed\Parser\Item $b) {
-            return ($a->getDate() > $b->getDate()) ? -1 : 1;
+        usort($items, function (\PicoFeed\Parser\Item $itemA, \PicoFeed\Parser\Item $itemB) {
+            return ($itemA->getDate() > $itemB->getDate()) ? -1 : 1;
         });
         foreach ($items as $item) {
             if ($this->load($item->getId())->count() == 0) {
